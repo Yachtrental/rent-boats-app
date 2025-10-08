@@ -260,4 +260,35 @@ function App() {
           <Route path="/booking/servicio" element={bookingService ? <ServiceBookingSystem service={bookingService} user={currentUser} onViewChange={() => {}} /> : <Navigate to="/" replace />} />
 
           {/* Details */}
-          <Route path="/barco/:id"
+          <Route path="/barco/:id" element={<BoatDetailPage user={currentUser} />} />
+<Route path="/patron/:id" element={<PatronDetailPage user={currentUser} />} />
+<Route path="/servicio/:id" element={<ServiceDetailPage user={currentUser} />} />
+
+<Route path="/quienes-somos" element={<QuienesSomos />} />
+<Route path="/como-funciona" element={<ComoFunciona />} />
+<Route path="/contacto" element={<Contacto />} />
+<Route path="/blog" element={<Blog />} />
+<Route path="/centro-de-ayuda" element={<CentroDeAyuda />} />
+<Route path="/faq" element={<FAQ />} />
+<Route path="/alta-armador" element={<AltaArmador />} />
+<Route path="/alta-patron" element={<AltaPatron />} />
+<Route path="/alta-servicio" element={<AltaServicio />} />
+<Route path="/colaboradores" element={<Colaboradores />} />
+
+{/* Rutas legales */}
+<Route path="/legal/aviso-legal" element={<AvisoLegal />} />
+<Route path="/legal/politica-de-privacidad" element={<PoliticaPrivacidad />} />
+<Route path="/legal/politica-de-cookies" element={<PoliticaCookies />} />
+<Route path="/legal/terminos-y-condiciones" element={<TerminosCondiciones />} />
+<Route path="/legal/resolucion-de-conflictos" element={<ResolucionConflictos />} />
+
+<Route path="*" element={<div className="text-center p-10">404 - Página no encontrada</div>} />
+        </Routes>
+      </AppShell>
+      <Toaster />
+    </BrowserRouter>
+  );
+}
+
+export default App;
+
