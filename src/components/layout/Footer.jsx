@@ -24,8 +24,8 @@ const Footer = ({ onViewChange }) => {
   };
 
   const socialLinks = [
-    { icon: <Instagram size={24} />, href: "https://instagram.com/rentboats", name: "Instagram" },
-    { icon: <Facebook size={24} />, href: "https://facebook.com/rentboats", name: "Facebook" },
+    { icon: <Instagram size={24} />, href: "https://www.instagram.com/rent_boat_oficial/", name: "Instagram" },
+    { icon: <Facebook size={24} />, href: "https://facebook.com/", name: "Facebook" },
     { icon: <Twitter size={24} />, href: "https://twitter.com/rentboats", name: "Twitter" },
     { icon: <Linkedin size={24} />, href: "https://linkedin.com/company/rentboats", name: "LinkedIn" },
     { icon: <Youtube size={24} />, href: "https://youtube.com/c/rentboats", name: "YouTube" },
