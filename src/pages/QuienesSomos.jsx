@@ -1,77 +1,55 @@
-import React from 'react';
-
-const QuienesSomos = () => {
+export default function QuienesSomos() {
   return (
-    <div className="quienes-somos">
-      <section className="hero-section">
-        <div className="hero-content">
-          <h1>¿Quiénes Somos?</h1>
-          <p className="subtitle">Líderes en alquiler de embarcaciones de lujo</p>
-        </div>
+    <div className="max-w-4xl mx-auto px-4 py-12">
+      <h1 className="text-4xl font-bold mb-8 text-center">Quiénes Somos</h1>
+      
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-4">Nuestra Historia</h2>
+        <p className="text-gray-700 leading-relaxed mb-4">
+          Somos una plataforma innovadora dedicada al alquiler de embarcaciones, 
+          conectando a propietarios de barcos con personas que buscan experiencias 
+          náuticas únicas e inolvidables.
+        </p>
+        <p className="text-gray-700 leading-relaxed">
+          Fundada con la pasión por el mar y la navegación, nuestra misión es 
+          hacer accesible el mundo náutico a todos, democratizando el acceso a 
+          embarcaciones de calidad y facilitando el proceso de alquiler.
+        </p>
       </section>
 
-      <section className="about-content">
-        <div className="container">
-          <div className="content-block">
-            <h2>Nuestra Historia</h2>
-            <p>
-              Rent-Boats nació de una pasión compartida por el mar y el deseo de democratizar el acceso a experiencias náuticas únicas. Desde nuestros inicios, nos hemos dedicado a conectar a propietarios de embarcaciones con personas que buscan vivir aventuras inolvidables en el agua.
-            </p>
-            <p>
-              Con presencia en los principales destinos náuticos del mundo, hemos construido una plataforma confiable que facilita miles de experiencias marítimas cada año, consolidándonos como referente en el sector del alquiler de embarcaciones.
-            </p>
-          </div>
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-4">Nuestra Misión</h2>
+        <p className="text-gray-700 leading-relaxed">
+          Crear una comunidad náutica confiable y transparente donde propietarios 
+          y navegantes puedan conectar de manera segura, ofreciendo experiencias 
+          marítimas excepcionales con el más alto estándar de calidad y servicio.
+        </p>
+      </section>
 
-          <div className="content-block">
-            <h2>Nuestra Misión</h2>
-            <p>
-              Facilitar experiencias náuticas excepcionales mediante una plataforma segura, transparente y accesible que conecta a propietarios de embarcaciones con aventureros del mar, garantizando la máxima calidad en cada reserva.
-            </p>
-          </div>
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-4">Nuestros Valores</h2>
+        <ul className="list-disc list-inside space-y-2 text-gray-700">
+          <li>Confianza y transparencia en cada transacción</li>
+          <li>Compromiso con la seguridad náutica</li>
+          <li>Excelencia en el servicio al cliente</li>
+          <li>Innovación tecnológica en el sector náutico</li>
+          <li>Respeto por el medio ambiente marino</li>
+        </ul>
+      </section>
 
-          <div className="content-block">
-            <h2>Nuestros Valores</h2>
-            <ul className="values-list">
-              <li>
-                <strong>Confianza:</strong> Verificamos cada embarcación y propietario para garantizar la seguridad de nuestros usuarios.
-              </li>
-              <li>
-                <strong>Transparencia:</strong> Información clara y completa en cada anuncio, sin sorpresas desagradables.
-              </li>
-              <li>
-                <strong>Excelencia:</strong> Nos esforzamos por superar las expectativas en cada experiencia.
-              </li>
-              <li>
-                <strong>Pasión por el mar:</strong> Compartimos el amor por la navegación y lo transmitimos en nuestro servicio.
-              </li>
-            </ul>
-          </div>
-
-          <div className="content-block">
-            <h2>¿Por qué elegirnos?</h2>
-            <div className="features-grid">
-              <div className="feature-item">
-                <h3>Variedad de embarcaciones</h3>
-                <p>Desde lanchas rápidas hasta yates de lujo, tenemos la embarcación perfecta para cada ocasión.</p>
-              </div>
-              <div className="feature-item">
-                <h3>Proceso simple y seguro</h3>
-                <p>Reserva en minutos con nuestro sistema de pago seguro y protección integral.</p>
-              </div>
-              <div className="feature-item">
-                <h3>Soporte 24/7</h3>
-                <p>Nuestro equipo está siempre disponible para ayudarte antes, durante y después de tu experiencia.</p>
-              </div>
-              <div className="feature-item">
-                <h3>Mejores destinos</h3>
-                <p>Opera en las ubicaciones más espectaculares del mundo para experiencias inolvidables.</p>
-              </div>
-            </div>
-          </div>
-        </div>
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">¿Por Qué Elegirnos?</h2>
+        <p className="text-gray-700 leading-relaxed mb-4">
+          Ofrecemos una plataforma segura y fácil de usar que simplifica todo el 
+          proceso de alquiler de embarcaciones. Con verificación de propietarios, 
+          seguros incluidos y atención al cliente 24/7, garantizamos tu tranquilidad 
+          en cada travesía.
+        </p>
+        <p className="text-gray-700 leading-relaxed">
+          Únete a miles de navegantes satisfechos que ya han descubierto la mejor 
+          manera de disfrutar del mar.
+        </p>
       </section>
     </div>
   );
-};
-
-export default QuienesSomos;
+}
