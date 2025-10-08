@@ -267,7 +267,7 @@ function App() {
 <Route path="/quienes-somos" element={<QuienesSomos />} />
 <Route path="/como-funciona" element={<ComoFunciona />} />
 <Route path="/contacto" element={<Contacto />} />
-<Route path="/blog" element={<Blog />} />
+<Route path="/blog" element={<BlogPage />} />
 <Route path="/centro-de-ayuda" element={<CentroDeAyuda />} />
 <Route path="/faq" element={<FAQ />} />
 <Route path="/alta-armador" element={<AltaArmador />} />
@@ -283,12 +283,10 @@ function App() {
 <Route path="/legal/resolucion-de-conflictos" element={<ResolucionConflictos />} />
 
 <Route path="*" element={<div className="text-center p-10">404 - Página no encontrada</div>} />
-        </Routes>
-      </AppShell>
-      <Toaster />
-    </BrowserRouter>
-  );
-}
 
-export default App;
+</Routes>
+</AppShell>
+<Toaster />
+</BrowserRouter>
+
 
