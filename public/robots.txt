@@ -1,0 +1,12 @@
+
+User-agent: *
+Allow: /
+
+# Disallow administrative and user-specific dashboards
+Disallow: /dashboard/
+Disallow: /admin/
+Disallow: /login/
+Disallow: /register/
+Disallow: /reset-password/
+
+Sitemap: https://www.yourdomain.com/sitemap.xml
