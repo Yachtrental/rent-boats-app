@@ -28,7 +28,7 @@ import { supabase } from '@/lib/customSupabaseClient';
 import { Heart, BookOpen, Menu, X, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 
 // Static pages from src/pages
 import QuienesSomos from '@/pages/QuienesSomos';
@@ -40,14 +40,24 @@ import AltaArmador from '@/pages/AltaArmador';
 import AltaPatron from '@/pages/AltaPatron';
 import AltaServicio from '@/pages/AltaServicio';
 import Colaboradores from '@/pages/Colaboradores';
-import AvisoLegal from '@/pages/legal/AvisoLegal';
-import PoliticaPrivacidad from '@/pages/legal/PoliticaPrivacidad';
-import PoliticaCookies from '@/pages/legal/PoliticaCookies';
-import TerminosCondiciones from '@/pages/legal/TerminosCondiciones';
-import ResolucionConflictos from '@/pages/legal/ResolucionConflictos';
+// Import legal pages directly from the pages directory since there is no /pages/legal folder.
+import AvisoLegal from '@/pages/AvisoLegal';
+import PoliticaPrivacidad from '@/pages/PoliticaDePrivacidad';
+import PoliticaCookies from '@/pages/PoliticaDeCookies';
+import TerminosCondiciones from '@/pages/TerminosYCondiciones';
+import ResolucionConflictos from '@/pages/ResolucionDeConflictos';
+
+// Import marketplace support pages (placeholders)
+import CentroDeAyudaMarketplace from '@/pages/marketplace/CentroDeAyuda';
+import GestionDeResenas from '@/pages/marketplace/GestionDeResenas';
+import PosicionamientoDeAnuncios from '@/pages/marketplace/PosicionamientoDeAnuncios';
+import PoliticasDeCancelacion from '@/pages/marketplace/PoliticasDeCancelacion';
+import MarketplaceFaq from '@/pages/marketplace/Faq';
 
 function AppShell({ children, currentUser, authLoading, language, setLanguage, isMenuOpen, setIsMenuOpen, onLogout }) {
   const navigate = useNavigate();
+  // Use React Router's useLocation hook to access the current pathname for active link styles and transitions.
+  const location = useLocation();
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
       <nav className="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50">
@@ -156,7 +166,8 @@ function AppShell({ children, currentUser, authLoading, language, setLanguage, i
           </motion.div>
         </AnimatePresence>
       </main>
-      <Footer onViewChangePath={(path) => navigate(path)} />
+      {/* Pass onViewChange callback to Footer so it can navigate without full page reload */}
+      <Footer onViewChange={(path) => navigate(path)} />
     </div>
   );
 }
@@ -282,7 +293,15 @@ function App() {
 <Route path="/legal/terminos-y-condiciones" element={<TerminosCondiciones />} />
 <Route path="/legal/resolucion-de-conflictos" element={<ResolucionConflictos />} />
 
-<Route path="*" element={<div className="text-center p-10">404 - Página no encontrada</div>} />
+          {/* Marketplace support pages */}
+          <Route path="/marketplace/centro-de-ayuda" element={<CentroDeAyudaMarketplace />} />
+          <Route path="/marketplace/gestion-de-resenas" element={<GestionDeResenas />} />
+          <Route path="/marketplace/posicionamiento-de-anuncios" element={<PosicionamientoDeAnuncios />} />
+          <Route path="/marketplace/politicas-de-cancelacion" element={<PoliticasDeCancelacion />} />
+          <Route path="/marketplace/faq" element={<MarketplaceFaq />} />
+
+          {/* Catch-all route */}
+          <Route path="*" element={<div className="text-center p-10">404 - Página no encontrada</div>} />
 
 </Routes>
 </AppShell>

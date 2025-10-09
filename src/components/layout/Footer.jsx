@@ -109,6 +109,7 @@ const Footer = ({ onViewChange }) => {
                     href={link.href}
                     className="text-gray-300 hover:text-blue-400 transition-colors duration-200 block"
                     whileHover={{ x: 5 }}
+                    onClick={(e) => handleLinkClick(e, link.href)}
                   >
                     {link.name}
                   </motion.a>
@@ -127,6 +128,7 @@ const Footer = ({ onViewChange }) => {
                     href={link.href}
                     className="text-gray-300 hover:text-blue-400 transition-colors duration-200 block"
                     whileHover={{ x: 5 }}
+                    onClick={(e) => handleLinkClick(e, link.href)}
                   >
                     {link.name}
                   </motion.a>
@@ -145,6 +147,7 @@ const Footer = ({ onViewChange }) => {
                     href={link.href}
                     className="text-gray-300 hover:text-blue-400 transition-colors duration-200 block"
                     whileHover={{ x: 5 }}
+                    onClick={(e) => handleLinkClick(e, link.href)}
                   >
                     {link.name}
                   </motion.a>
@@ -163,6 +166,7 @@ const Footer = ({ onViewChange }) => {
                     href={link.href}
                     className="text-gray-300 hover:text-blue-400 transition-colors duration-200 block"
                     whileHover={{ x: 5 }}
+                    onClick={(e) => handleLinkClick(e, link.href)}
                   >
                     {link.name}
                   </motion.a>
