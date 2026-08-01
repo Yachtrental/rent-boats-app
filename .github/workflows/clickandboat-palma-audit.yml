@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 jobs:
-  test-filters:
+  controllers:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -26,13 +26,13 @@ jobs:
       - name: Install dependencies
         run: pip install -r tools/clickandboat-audit/requirements.txt
 
-      - name: Validate public filters
-        run: python tools/clickandboat-audit/test_filter_queries.py
+      - name: Fetch search controllers
+        run: python tools/clickandboat-audit/fetch_search_controllers.py
 
-      - name: Upload validation
+      - name: Upload controllers
         uses: actions/upload-artifact@v4
         with:
-          name: clickandboat-filter-tests
-          path: tools/clickandboat-audit/filter-test-output
+          name: clickandboat-search-controllers
+          path: tools/clickandboat-audit/controller-output
           if-no-files-found: error
           retention-days: 7
