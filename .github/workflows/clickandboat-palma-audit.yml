@@ -11,11 +11,11 @@ permissions:
   contents: read
 
 jobs:
-  adaptive:
+  adaptive-v2:
     runs-on: ubuntu-latest
     timeout-minutes: 330
     env:
-      OUTPUT_DIR: tools/clickandboat-audit/adaptive-output
+      OUTPUT_DIR: tools/clickandboat-audit/adaptive-v2-output
       WORKERS: '16'
       PAGE_WORKERS: '6'
       PRICE_MAX: '50000'
@@ -33,26 +33,26 @@ jobs:
       - name: Install dependencies
         run: pip install -r tools/clickandboat-audit/requirements.txt
 
-      - name: Collect adaptive exhaustive inventory
+      - name: Collect strict adaptive inventory
         id: collect
         continue-on-error: true
-        run: python tools/clickandboat-audit/scrape_adaptive.py
+        run: python tools/clickandboat-audit/scrape_adaptive_v2.py
 
       - name: Show summary
         if: always()
         run: |
-          if [ -f tools/clickandboat-audit/adaptive-output/resumen.json ]; then
-            cat tools/clickandboat-audit/adaptive-output/resumen.json
+          if [ -f tools/clickandboat-audit/adaptive-v2-output/resumen.json ]; then
+            cat tools/clickandboat-audit/adaptive-v2-output/resumen.json
           else
             echo 'No summary was produced.'
           fi
 
-      - name: Upload adaptive database
+      - name: Upload strict adaptive database
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: clickandboat-palma-adaptive-database
-          path: tools/clickandboat-audit/adaptive-output
+          name: clickandboat-palma-adaptive-v2-database
+          path: tools/clickandboat-audit/adaptive-v2-output
           if-no-files-found: warn
           retention-days: 7
 
