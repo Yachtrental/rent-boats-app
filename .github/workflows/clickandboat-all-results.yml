@@ -1,0 +1,36 @@
+name: ClickAndBoat Palma All Results
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      OUTPUT_DIR: /tmp/collector/tools/clickandboat-audit/all-results-output
+      PAGE_WORKERS: 8
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: pip install -r tools/clickandboat-audit/requirements.txt
+      - name: Collect every public search result
+        run: python tools/clickandboat-audit/scrape_all_search_results.py
+      - name: Show summary
+        if: always()
+        run: |
+          if [ -f "$OUTPUT_DIR/resumen.json" ]; then cat "$OUTPUT_DIR/resumen.json"; fi
+      - name: Upload complete result database
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: clickandboat-palma-all-results
+          path: tools/clickandboat-audit/all-results-output
+          if-no-files-found: error
+          retention-days: 7
