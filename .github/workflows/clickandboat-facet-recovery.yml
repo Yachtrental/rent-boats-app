@@ -1,0 +1,49 @@
+name: ClickAndBoat Facet Recovery
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/clickandboat-facet-recovery.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      OUTPUT_DIR: /tmp/collector/tools/clickandboat-audit/facet-discovery-output
+      PAGE_WORKERS: '8'
+    steps:
+      - name: Checkout runner
+        uses: actions/checkout@v4
+
+      - name: Checkout collector source
+        run: git clone --depth 1 --branch research/clickandboat-palma-20260801 https://github.com/Yachtrental/rent-boats-app.git /tmp/collector
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r /tmp/collector/tools/clickandboat-audit/requirements.txt
+
+      - name: Discover residual boat URLs
+        run: python /tmp/collector/tools/clickandboat-audit/discover_facet_grid.py
+
+      - name: Show summary
+        if: always()
+        run: |
+          if [ -f "$OUTPUT_DIR/resumen.json" ]; then cat "$OUTPUT_DIR/resumen.json"; fi
+
+      - name: Upload recovery results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: clickandboat-palma-facet-recovery
+          path: /tmp/collector/tools/clickandboat-audit/facet-discovery-output
+          if-no-files-found: warn
+          retention-days: 7
