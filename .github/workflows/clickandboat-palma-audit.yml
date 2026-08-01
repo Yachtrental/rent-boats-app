@@ -11,9 +11,16 @@ permissions:
   contents: read
 
 jobs:
-  facet-builder:
+  adaptive:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 330
+    env:
+      OUTPUT_DIR: tools/clickandboat-audit/adaptive-output
+      WORKERS: '16'
+      PAGE_WORKERS: '6'
+      PRICE_MAX: '50000'
+      MIN_PRICE_WIDTH: '20'
+      STRICT_COUNT: '0'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,13 +33,29 @@ jobs:
       - name: Install dependencies
         run: pip install -r tools/clickandboat-audit/requirements.txt
 
-      - name: Validate facet builder
-        run: python tools/clickandboat-audit/test_facet_builder.py
+      - name: Collect adaptive exhaustive inventory
+        id: collect
+        continue-on-error: true
+        run: python tools/clickandboat-audit/scrape_adaptive.py
 
-      - name: Upload validation
+      - name: Show summary
+        if: always()
+        run: |
+          if [ -f tools/clickandboat-audit/adaptive-output/resumen.json ]; then
+            cat tools/clickandboat-audit/adaptive-output/resumen.json
+          else
+            echo 'No summary was produced.'
+          fi
+
+      - name: Upload adaptive database
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: clickandboat-facet-tests
-          path: tools/clickandboat-audit/facet-test-output
-          if-no-files-found: error
+          name: clickandboat-palma-adaptive-database
+          path: tools/clickandboat-audit/adaptive-output
+          if-no-files-found: warn
           retention-days: 7
+
+      - name: Enforce detail success
+        if: steps.collect.outcome != 'success'
+        run: exit 1
