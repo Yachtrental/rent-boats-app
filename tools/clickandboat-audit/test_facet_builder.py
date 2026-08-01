@@ -57,13 +57,12 @@ for name, filters in TESTS.items():
         "locationWhere": None,
     }
     built = session.post(ENDPOINT, json=payload, timeout=60)
-    response_json = None
     try:
         response_json = built.json()
     except Exception:
         response_json = {"raw": built.text[:1000]}
-    built_path = response_json.get("url", "") if isinstance(response_json, dict) else ""
-    query = response_json.get("queryParams", "") if isinstance(response_json, dict) else ""
+    built_path = (response_json.get("url") or "") if isinstance(response_json, dict) else ""
+    query = (response_json.get("queryParams") or "") if isinstance(response_json, dict) else ""
     result_url = urljoin(HOST, built_path + query) if built_path else ""
     result_status = None
     result_count = None
