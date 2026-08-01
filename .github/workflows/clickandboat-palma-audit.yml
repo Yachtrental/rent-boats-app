@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 jobs:
-  probe:
+  test-filters:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -26,13 +26,13 @@ jobs:
       - name: Install dependencies
         run: pip install -r tools/clickandboat-audit/requirements.txt
 
-      - name: Inspect search sources
-        run: python tools/clickandboat-audit/probe_search.py
+      - name: Validate public filters
+        run: python tools/clickandboat-audit/test_filter_queries.py
 
-      - name: Upload probe
+      - name: Upload validation
         uses: actions/upload-artifact@v4
         with:
-          name: clickandboat-search-probe
-          path: tools/clickandboat-audit/probe-output
+          name: clickandboat-filter-tests
+          path: tools/clickandboat-audit/filter-test-output
           if-no-files-found: error
           retention-days: 7
