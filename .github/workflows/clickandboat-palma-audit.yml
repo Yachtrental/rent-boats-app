@@ -15,10 +15,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 330
     env:
-      TARGET_URL: https://www.clickandboat.com/es/alquiler/pais-espana/isla-mallorca/ciudad-palma
       OUTPUT_DIR: tools/clickandboat-audit/output
-      MAX_PAGES: '320'
-      WORKERS: '10'
+      WORKERS: '16'
+      PARTITION_WORKERS: '4'
+      MAX_PAGES_PER_PARTITION: '150'
       STRICT_COUNT: '1'
     steps:
       - name: Checkout
@@ -35,7 +35,7 @@ jobs:
       - name: Collect complete public inventory
         id: collect
         continue-on-error: true
-        run: python tools/clickandboat-audit/scrape.py
+        run: python tools/clickandboat-audit/scrape_partitioned.py
 
       - name: Show summary
         if: always()
@@ -50,7 +50,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: clickandboat-palma-database
+          name: clickandboat-palma-database-partitioned
           path: tools/clickandboat-audit/output
           if-no-files-found: warn
           retention-days: 7
