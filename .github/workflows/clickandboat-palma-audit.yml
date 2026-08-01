@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 jobs:
-  controllers:
+  facet-builder:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -26,13 +26,13 @@ jobs:
       - name: Install dependencies
         run: pip install -r tools/clickandboat-audit/requirements.txt
 
-      - name: Fetch search controllers
-        run: python tools/clickandboat-audit/fetch_search_controllers.py
+      - name: Validate facet builder
+        run: python tools/clickandboat-audit/test_facet_builder.py
 
-      - name: Upload controllers
+      - name: Upload validation
         uses: actions/upload-artifact@v4
         with:
-          name: clickandboat-search-controllers
-          path: tools/clickandboat-audit/controller-output
+          name: clickandboat-facet-tests
+          path: tools/clickandboat-audit/facet-test-output
           if-no-files-found: error
           retention-days: 7
